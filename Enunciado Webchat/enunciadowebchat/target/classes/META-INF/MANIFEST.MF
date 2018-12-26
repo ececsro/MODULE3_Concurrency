@@ -1,10 +1,11 @@
 Manifest-Version: 1.0
-Implementation-Title: webchat
+Implementation-Title: Carlos.Sanchez.Rodriguez
 Implementation-Version: 0.0.1-SNAPSHOT
 Built-By: ECECSRO
 Implementation-Vendor-Id: es.codeurjc
 Build-Jdk: 1.8.0_191
-Implementation-URL: http://projects.spring.io/spring-boot/webchat/
+Implementation-URL: http://projects.spring.io/spring-boot/Carlos.Sanch
+ ez.Rodriguez/
 Created-By: Maven Integration for Eclipse
 Implementation-Vendor: Pivotal Software, Inc.
 
