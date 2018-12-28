@@ -3,6 +3,7 @@ package es.sidelab.webchat;
 import static org.junit.Assert.assertTrue;
 
 import java.util.ArrayList;
+import java.util.ConcurrentModificationException;
 import java.util.Objects;
 import java.util.concurrent.CompletionService;
 import java.util.concurrent.ExecutionException;
@@ -102,7 +103,7 @@ public class ChatManagerTest {
 			}
 
 		} 
-		catch (ExecutionException ex) {
+		catch (InterruptedException | ExecutionException ex) {
 			System.out.println("!!!!!!! ERROR !!!!!!! " + ex.getMessage());
 			ex.printStackTrace();
 			assertTrue("Exception: "+ ex.getMessage() + " raised", false);
@@ -114,7 +115,7 @@ public class ChatManagerTest {
 		}
 	}
 
-	public String userTestBehaviour1(int userId) {
+	public String userTestBehaviour1 (int userId) throws InterruptedException, TimeoutException, ExecutionException {
 
 		final int N_ACTIONS = 5;
 		
@@ -138,16 +139,18 @@ public class ChatManagerTest {
 				chat.addUser(user);
 				for (User userInChat : chat.getUsers()) {
 					userInChatTestUser = (TestUser) userInChat;
-					System.out.println("Action: "+ userId + " --- User: " + userInChatTestUser.getName() + " in chat: " + chat.getName());
+					System.out.println("Action with user"+ userId + " --- User: " + userInChatTestUser.getName() + " in chat: " + chat.getName());
 				}
 
 			}
-			return "!!! GREAT !!! - Action with " + userId + " OK";
+			return "!!! GREAT !!! - Action with user" + userId + " OK";
 		
-		} catch (InterruptedException | TimeoutException e) {
+		} catch (ConcurrentModificationException | InterruptedException | TimeoutException e) {
 			// TODO Auto-generated catch block
 //			e.printStackTrace();
-			return " !!!! ERROR !!!!! - Action with " + userId + " interrupted: ";
+			throw new InterruptedException();
+//			return " !!!! ERROR !!!!! - Action with " + userId + " interrupted: ";
 		}
 	}
 }
+
